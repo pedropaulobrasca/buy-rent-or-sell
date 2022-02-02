@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { GoogleMap, InfoWindow, Marker } from '@react-google-maps/api';
+import {
+  GoogleMap,
+  GoogleMapProps,
+  InfoWindow,
+  Marker,
+} from '@react-google-maps/api';
 
 const markers = [
   {
@@ -45,9 +50,14 @@ export function GoogleMaps() {
 
   return (
     <GoogleMap
+      zoom={8}
       onLoad={handleOnLoad}
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={{ width: '100%', height }}
+      options={{
+        fullscreenControl: false,
+        mapTypeControl: false,
+      }}
     >
       {markers.map(({ id, name, position }) => (
         <Marker

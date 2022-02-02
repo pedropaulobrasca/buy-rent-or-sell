@@ -1,6 +1,7 @@
 import { useLoadScript } from '@react-google-maps/api';
 import { GoogleMaps } from '../components/GoogleMaps';
 import { Header } from '../components/Header';
+import { Sidebar } from '../components/Sidebar';
 
 export function Home() {
   const { isLoaded } = useLoadScript({
@@ -10,6 +11,7 @@ export function Home() {
     <>
       <Header />
       {isLoaded && <GoogleMaps />}
+      <Sidebar />
     </>
   );
 }
