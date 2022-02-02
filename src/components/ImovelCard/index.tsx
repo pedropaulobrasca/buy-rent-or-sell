@@ -1,21 +1,38 @@
 import { FaHeart } from 'react-icons/fa';
 import { Container, DescGroup, ImageGroup } from './styles';
 
-export function ImovelCard() {
+interface Props {
+  imovel: any;
+}
+
+export function ImovelCard(props: Props) {
   return (
     <Container>
       <ImageGroup>
         <FaHeart />
         <img
-          src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-          alt="Imovel"
+          src={`http://localhost:3000/${props.imovel.foto}`}
+          alt="Foto do imóvel"
         />
       </ImageGroup>
       <DescGroup>
-        <h3>Rua Professor Adalberto Lopes Filho Bla bla bla</h3>
+        <h3>{props.imovel.endereco.rua}</h3>
         <div>
-          <p>Taubaté, SP</p>
-          <p>R$ 1.000,00</p>
+          <p>
+            {props.imovel.endereco.cidade}, {props.imovel.endereco.estado}
+          </p>
+          <p>
+            {new Intl.NumberFormat('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            }).format(
+              props.imovel.valor +
+                props.imovel.valor_condominio +
+                props.imovel.valor_fundo_promo +
+                props.imovel.valor_aluguel +
+                props.imovel.iptu
+            )}
+          </p>
         </div>
       </DescGroup>
     </Container>

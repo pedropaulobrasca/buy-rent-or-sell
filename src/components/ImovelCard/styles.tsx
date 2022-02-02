@@ -52,7 +52,7 @@ export const DescGroup = styled.div`
     font-weight: bold;
     color: #3d3d3d;
 
-    margin-top: 50px;
+    margin-top: 60px;
 
     @media (max-width: 700px) {
       margin-top: 60px;

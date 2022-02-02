@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaSearch } from 'react-icons/fa';
+import axios from 'axios';
+
 import { ImovelCard } from '../ImovelCard';
 import {
   Button,
@@ -18,6 +20,18 @@ export function Sidebar() {
     setIsOpenMenu(!isOpenMenu);
   }
 
+  // Buscando os imóveis na API
+  const [imoveis, setImoveis] = useState([]);
+
+  useEffect(() => {
+    async function loadImoveis() {
+      const response = await axios.get('http://localhost:3000/imovel');
+      setImoveis(response.data.data);
+    }
+
+    loadImoveis();
+  }, []);
+
   return (
     <Container>
       {isOpenMenu && (
@@ -32,14 +46,9 @@ export function Sidebar() {
               <p>Imóveis encontrados: 8</p>
             </SearchGroup>
             <ImovelCards>
-              <ImovelCard />
-              <ImovelCard />
-              <ImovelCard />
-              <ImovelCard />
-              <ImovelCard />
-              <ImovelCard />
-              <ImovelCard />
-              <ImovelCard />
+              {imoveis.map((imovel: any) => (
+                <ImovelCard key={imovel.id} imovel={imovel} />
+              ))}
             </ImovelCards>
           </Wrapper>
           <Button open={false} onClick={handleMenu}>
