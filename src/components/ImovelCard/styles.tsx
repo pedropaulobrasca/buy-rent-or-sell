@@ -53,6 +53,10 @@ export const DescGroup = styled.div`
     color: #3d3d3d;
 
     margin-top: 50px;
+
+    @media (max-width: 700px) {
+      margin-top: 60px;
+    }
   }
 
   & > div {

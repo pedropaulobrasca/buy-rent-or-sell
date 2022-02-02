@@ -46,6 +46,19 @@ export const Wrapper = styled.div`
   &::-webkit-scrollbar-thumb {
     background: #888;
   }
+
+  @media (max-width: 700px) {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+
+    margin: 0;
+
+    height: 100vh;
+    width: 100vw;
+    max-width: 100vw;
+  }
 `;
 
 export const SearchGroup = styled.div`
@@ -124,6 +137,7 @@ export const Button = styled.button<ButtonProps>`
 
   border: 0;
   border-radius: 50%;
+  border: 1px solid #ddd;
   background: #ffffff;
 
   position: absolute;
@@ -139,6 +153,12 @@ export const Button = styled.button<ButtonProps>`
     background: #666;
     color: #fff;
   }
+
+  @media (max-width: 700px) {
+    left: 20px;
+
+    border: 1px solid #3d3d3d;
+  }
 `;
 
 export const ImovelCards = styled.div`
@@ -153,5 +173,9 @@ export const ImovelCards = styled.div`
   & > div {
     width: 100%;
     height: 100%;
+  }
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
   }
 `;

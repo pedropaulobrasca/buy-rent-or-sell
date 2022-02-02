@@ -24,4 +24,8 @@ export const SSignIn = styled.a`
   right: 0;
   margin-right: 18px;
   cursor: pointer;
+
+  @media (max-width: 480px) {
+    display: none;
+  }
 `;
