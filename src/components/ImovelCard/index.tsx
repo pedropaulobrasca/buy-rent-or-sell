@@ -11,7 +11,7 @@ export function ImovelCard(props: Props) {
       <ImageGroup>
         <FaHeart />
         <img
-          src={`http://localhost:3000/${props.imovel.foto}`}
+          src={`http://api.investmall.b2ml.com.br/${props.imovel.foto}`}
           alt="Foto do imóvel"
         />
       </ImageGroup>

@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
 
   width: 277px;
-  height: 360px;
+  min-height: 360px;
 
   margin: 0 auto;
 `;
@@ -23,7 +23,8 @@ export const ImageGroup = styled.div`
 
   & > img {
     width: 100%;
-    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
 
     object-fit: cover;
 
@@ -51,6 +52,8 @@ export const DescGroup = styled.div`
     font-size: 16px;
     font-weight: bold;
     color: #3d3d3d;
+
+    height: 80px;
 
     margin-top: 60px;
 

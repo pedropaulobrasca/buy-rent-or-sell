@@ -1,36 +1,25 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   GoogleMap,
   GoogleMapProps,
   InfoWindow,
   Marker,
 } from '@react-google-maps/api';
-
-const markers = [
-  {
-    id: 1,
-    name: 'Chicago, Illinois',
-    position: { lat: 41.881832, lng: -87.623177 },
-  },
-  {
-    id: 2,
-    name: 'Denver, Colorado',
-    position: { lat: 39.739235, lng: -104.99025 },
-  },
-  {
-    id: 3,
-    name: 'Los Angeles, California',
-    position: { lat: 34.052235, lng: -118.243683 },
-  },
-  {
-    id: 4,
-    name: 'New York, New York',
-    position: { lat: 40.712776, lng: -74.005974 },
-  },
-];
+import axios from 'axios';
 
 export function GoogleMaps() {
+  const [imoveis, setImoveis] = useState([]);
   const [activeMarker, setActiveMarker] = useState(null);
+
+  useEffect(() => {
+    const axiosImoveis = async () => {
+      const response = await axios.get(
+        'http://api.investmall.b2ml.com.br/imovel'
+      );
+      setImoveis(response.data.data);
+    };
+    axiosImoveis();
+  }, []);
 
   const handleActiveMarker = (marker: any) => {
     if (marker === activeMarker) {
@@ -41,7 +30,9 @@ export function GoogleMaps() {
 
   const handleOnLoad = (map: any) => {
     const bounds = new google.maps.LatLngBounds();
-    markers.forEach(({ position }) => bounds.extend(position));
+    imoveis.forEach((imovel: any) =>
+      bounds.extend({ lat: imovel.endereco.lat, lng: imovel.endereco.lng })
+    );
     map.fitBounds(bounds);
   };
 
@@ -50,25 +41,26 @@ export function GoogleMaps() {
 
   return (
     <GoogleMap
-      zoom={8}
+      zoom={4}
       onLoad={handleOnLoad}
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={{ width: '100%', height }}
+      center={{ lat: -23.5489, lng: -46.6388 }}
       options={{
         fullscreenControl: false,
         mapTypeControl: false,
       }}
     >
-      {markers.map(({ id, name, position }) => (
+      {imoveis.map((imovel: any) => (
         <Marker
-          key={id}
+          key={imovel.id}
           options={{ icon: 'https://i.imgur.com/9G5JOp8.png' }}
-          position={position}
-          onClick={() => handleActiveMarker(id)}
+          position={{ lat: imovel.endereco.lat, lng: imovel.endereco.lng }}
+          onClick={() => handleActiveMarker(imovel.id)}
         >
-          {activeMarker === id ? (
+          {activeMarker === imovel.id ? (
             <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-              <div>{name}</div>
+              <div>{imovel.endereco.rua}</div>
             </InfoWindow>
           ) : null}
         </Marker>

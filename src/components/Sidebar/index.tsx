@@ -25,7 +25,7 @@ export function Sidebar() {
 
   useEffect(() => {
     async function loadImoveis() {
-      const response = await axios.get('http://localhost:3000/imovel');
+      const response = await axios.get('http://api.investmall.b2ml.com.br/imovel');
       setImoveis(response.data.data);
     }
 
