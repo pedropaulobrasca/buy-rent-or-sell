@@ -14,9 +14,11 @@ export function GoogleMaps() {
   useEffect(() => {
     const axiosImoveis = async () => {
       const response = await axios.get(
-        'http://api.investmall.b2ml.com.br/imovel'
+        `${import.meta.env.VITE_API_URI}/imovel`,
       );
       setImoveis(response.data.data);
+      console.log(response.data.data);
+      
     };
     axiosImoveis();
   }, []);

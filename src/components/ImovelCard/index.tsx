@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { Container, DescGroup, ImageGroup } from './styles';
 
@@ -11,7 +12,7 @@ export function ImovelCard(props: Props) {
       <ImageGroup>
         <FaHeart />
         <img
-          src={`http://api.investmall.b2ml.com.br/${props.imovel.foto}`}
+          src={`${import.meta.env.VITE_API_URI}/${props.imovel.foto}`}
           alt="Foto do imóvel"
         />
       </ImageGroup>
